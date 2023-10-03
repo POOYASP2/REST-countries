@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router';
-import { RouterLink } from 'vue-router';
+import { useTheme } from 'stores/theme';
+
 import type { CountryDetails } from 'src/types';
 import BorderCountry from './BorderCountry.vue';
 interface CountryDetailProps {
@@ -19,10 +19,14 @@ const {
   borders,
   capital,
 } = props.country;
-console.log(borders);
+const theme = useTheme();
 </script>
 <template>
-  <div class="country-details-page">
+  <div
+    :class="`country-details-page ${
+      theme.darkMode ? 'country-details-page--dark' : null
+    }`"
+  >
     <div class="flag_wrapper">
       <img :src="flags.png" alt="Country flags" />
     </div>
@@ -88,5 +92,8 @@ console.log(borders);
   @media (min-width: 768px) {
     flex-direction: row;
   }
+}
+.country-details-page--dark {
+  color: white;
 }
 </style>

@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
-import { reactive, watch, ref } from 'vue';
-import { RouterLink } from 'vue-router';
-
+import { reactive, watch } from 'vue';
+import { useTheme } from 'stores/theme';
 import { api } from 'boot/axios';
 import type { CountryDetails } from 'src/types';
 import CountryDetail from 'components/CountryDetail.vue';
 import { useQuasar } from 'quasar';
 const $q = useQuasar();
+const theme = useTheme();
 
 const route = useRoute();
 let slug = Array.isArray(route.params.countrySlug)
@@ -38,7 +38,12 @@ const backInHistory = () => {
 </script>
 <template>
   <q-page class="page">
-    <button class="back-button" @click="backInHistory">Back &larr;</button>
+    <button
+      :class="`back-button ${theme.darkMode ? 'back-button--dark' : null}`"
+      @click="backInHistory"
+    >
+      Back &larr;
+    </button>
     <div v-if="country.length > 0">
       <CountryDetail :country="country[0]" />
     </div>
@@ -48,5 +53,9 @@ const backInHistory = () => {
 .back-button {
   margin-inline-end: auto;
   height: fit-content;
+  &--dark {
+    color: white;
+    background: #000;
+  }
 }
 </style>

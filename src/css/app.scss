@@ -1,8 +1,10 @@
 // app global css in SCSS form
-html,
+
 body {
     background: hsl(0, 0%, 98%);
 }
+
+
 
 .page {
     max-width: 1360px;
@@ -23,4 +25,8 @@ body {
     }
 
 
+}
+
+.page-countainer--dark {
+    background: $darker-blue;
 }
