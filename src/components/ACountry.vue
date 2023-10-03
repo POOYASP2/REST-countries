@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import type { CountryDetails } from 'src/types';
-import { ref } from 'vue';
 import { RouterLink } from 'vue-router';
+import { useTheme } from 'stores/theme';
 interface ACountryProps {
   name: CountryDetails['name']['official'];
   flag: CountryDetails['flags']['png'];
@@ -10,12 +10,17 @@ interface ACountryProps {
   capital?: CountryDetails['capital'];
   code: CountryDetails['cca3'];
 }
+const theme = useTheme();
+
 const props = defineProps<ACountryProps>();
 const { name, flag, population, region, capital, code } = props;
 </script>
 
 <template>
-  <RouterLink class="country" :to="`country/${code}`">
+  <RouterLink
+    :class="`country ${theme.darkMode ? 'country--dark' : null}`"
+    :to="`country/${code}`"
+  >
     <div class="country__flag-holder">
       <img :src="flag" alt="" />
     </div>
@@ -64,6 +69,24 @@ const { name, flag, population, region, capital, code } = props;
       font-size: 18px;
       font-weight: 600;
       margin-bottom: 8px;
+    }
+  }
+  &--dark {
+    background: $dark-blue;
+    color: white;
+    .country__descrption {
+      &__name {
+        color: white;
+      }
+      &__pupilation {
+        color: white;
+      }
+      &__region {
+        color: white;
+      }
+      &__capital {
+        color: white;
+      }
     }
   }
 }
