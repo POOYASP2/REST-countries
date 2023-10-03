@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, reactive, watch, onMounted } from 'vue';
+import { ref, reactive, watch } from 'vue';
 import { useQuasar } from 'quasar';
 
 import { api } from 'boot/axios';
@@ -16,7 +16,7 @@ const region = ref(
     ? (route.query.region as string)
     : ''
 );
-watch(region, async (newRegion, _) => {
+watch(region, async (newRegion) => {
   router.push({ query: { region: newRegion } });
   loadCountriesRegion();
 });

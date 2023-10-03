@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router';
+import { RouterLink } from 'vue-router';
 import type { CountryDetails } from 'src/types';
+import BorderCountry from './BorderCountry.vue';
 interface CountryDetailProps {
   country: CountryDetails;
 }
@@ -17,6 +19,7 @@ const {
   borders,
   capital,
 } = props.country;
+console.log(borders);
 </script>
 <template>
   <div class="country-details-page">
@@ -57,8 +60,9 @@ const {
           </p>
         </div>
       </div>
-      <div class="border-countries">
+      <div v-if="borders" class="border-countries">
         <span class="detail__title">Border Countries:</span>
+        <BorderCountry :borders="borders" />
       </div>
     </div>
   </div>
