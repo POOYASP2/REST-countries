@@ -42,6 +42,7 @@ export interface CountryDetails {
     root: string;
     suffixes: string[];
   };
+  borders: string[];
   independent: boolean;
   landlocked: boolean;
   languages: {

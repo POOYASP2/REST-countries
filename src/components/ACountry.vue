@@ -1,19 +1,21 @@
 <script lang="ts" setup>
 import type { CountryDetails } from 'src/types';
 import { ref } from 'vue';
+import { RouterLink } from 'vue-router';
 interface ACountryProps {
   name: CountryDetails['name']['official'];
   flag: CountryDetails['flags']['png'];
   population: CountryDetails['population'];
   region: CountryDetails['region'];
   capital?: CountryDetails['capital'];
+  code: CountryDetails['cca3'];
 }
 const props = defineProps<ACountryProps>();
-const { name, flag, population, region, capital } = props;
+const { name, flag, population, region, capital, code } = props;
 </script>
 
 <template>
-  <div class="country">
+  <RouterLink class="country" :to="`country/${code}`">
     <div class="country__flag-holder">
       <img :src="flag" alt="" />
     </div>
@@ -36,7 +38,7 @@ const { name, flag, population, region, capital } = props;
         </div>
       </div>
     </div>
-  </div>
+  </RouterLink>
 </template>
 <style scoped lang="scss">
 .country {
@@ -45,6 +47,8 @@ const { name, flag, population, region, capital } = props;
   color: black;
   width: fit-content;
   overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
   &__flag-holder {
     display: flex;
 
